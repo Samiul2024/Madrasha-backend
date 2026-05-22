@@ -7,6 +7,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 
 import courseRoutes from "./modules/course/course.routes.js";
+import adminRoutes from "./modules/admin/admin.routes.js";
 
 import {
   notFound,
