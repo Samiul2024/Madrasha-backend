@@ -8,7 +8,7 @@ import connectDB from "./config/db.js";
 
 import courseRoutes from "./modules/course/course.routes.js";
 
-import adminRoutes from "./modules/admin/admin.routes.js";
+import adminRoutes from "./modules/admin/admin.routes.js";`nimport noticeRoutes from "./modules/notice/notice.routes.js";
 
 import {
   notFound,
