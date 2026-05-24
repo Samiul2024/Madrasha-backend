@@ -1,38 +1,51 @@
 import asyncHandler from "../../utils/asyncHandler.js";
 
-const getCourses =
-  asyncHandler(
-    async (req, res) => {
-      res.status(200).json({
-        success: true,
+import Course from "./course.model.js";
 
-        courses: [
-          {
-            title:
-              "Hifzul Quran Program",
-
-            duration:
-              "3-5 Years",
-
-            fee:
-              "500 / Month",
-          },
-
-          {
-            title:
-              "Boyosko Islamic Education",
-
-            duration:
-              "12-18 Months",
-
-            fee:
-              "100 / Month",
-          },
-        ],
+export const getCourses =
+  asyncHandler(async (req, res) => {
+    const courses =
+      await Course.find().sort({
+        createdAt: -1,
       });
-    }
-  );
 
-export {
-  getCourses,
-};
+    res.json({
+      success: true,
+      courses,
+    });
+  });
+
+export const createCourse =
+  asyncHandler(async (req, res) => {
+    const course =
+      await Course.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      course,
+    });
+  });
+
+export const deleteCourse =
+  asyncHandler(async (req, res) => {
+    const course =
+      await Course.findById(
+        req.params.id
+      );
+
+    if (!course) {
+      res.status(404);
+
+      throw new Error(
+        "Course not found"
+      );
+    }
+
+    await course.deleteOne();
+
+    res.json({
+      success: true,
+      message:
+        "Course deleted",
+    });
+  });

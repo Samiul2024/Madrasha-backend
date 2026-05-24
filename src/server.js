@@ -7,6 +7,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 
 import courseRoutes from "./modules/course/course.routes.js";
+
 import adminRoutes from "./modules/admin/admin.routes.js";
 
 import {
@@ -35,6 +36,11 @@ app.get("/", (req, res) => {
 app.use(
   "/api/courses",
   courseRoutes
+);
+
+app.use(
+  "/api/admin",
+  adminRoutes
 );
 
 app.use(notFound);
