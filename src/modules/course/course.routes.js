@@ -2,7 +2,9 @@ import express from "express";
 
 import {
   getCourses,
+  getSingleCourse,
   createCourse,
+  updateCourse,
   deleteCourse,
 } from "./course.controller.js";
 
@@ -15,10 +17,21 @@ const router =
 
 router.get("/", getCourses);
 
+router.get(
+  "/:id",
+  getSingleCourse
+);
+
 router.post(
   "/",
   protect,
   createCourse
+);
+
+router.put(
+  "/:id",
+  protect,
+  updateCourse
 );
 
 router.delete(

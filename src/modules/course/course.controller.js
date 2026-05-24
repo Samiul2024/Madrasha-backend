@@ -15,12 +15,50 @@ export const getCourses =
     });
   });
 
+export const getSingleCourse =
+  asyncHandler(async (req, res) => {
+    const course =
+      await Course.findById(
+        req.params.id
+      );
+
+    if (!course) {
+      res.status(404);
+
+      throw new Error(
+        "Course not found"
+      );
+    }
+
+    res.json({
+      success: true,
+      course,
+    });
+  });
+
 export const createCourse =
   asyncHandler(async (req, res) => {
     const course =
       await Course.create(req.body);
 
     res.status(201).json({
+      success: true,
+      course,
+    });
+  });
+
+export const updateCourse =
+  asyncHandler(async (req, res) => {
+    const course =
+      await Course.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+          new: true,
+        }
+      );
+
+    res.json({
       success: true,
       course,
     });
