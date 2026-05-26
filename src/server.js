@@ -9,7 +9,8 @@ import connectDB from "./config/db.js";
 import courseRoutes from "./modules/course/course.routes.js";
 
 import adminRoutes from "./modules/admin/admin.routes.js";
-import noticeRoutes from "./modules/notice/notice.routes.js";`nimport galleryRoutes from "./modules/gallery/gallery.routes.js";
+import noticeRoutes from "./modules/notice/notice.routes.js";
+import galleryRoutes from "./modules/gallery/gallery.routes.js";
 
 import {
   notFound,
@@ -39,10 +40,9 @@ app.use(
   courseRoutes
 );
 
-app.use(
-  "/api/admin",
-  adminRoutes
-);
+app.use("/api/admin", adminRoutes);
+app.use("/api/notices", noticeRoutes);
+app.use("/api/gallery", galleryRoutes);
 
 app.use(notFound);
 
@@ -56,3 +56,4 @@ app.listen(PORT, () => {
     `Server running on port ${PORT}`
   );
 });
+
