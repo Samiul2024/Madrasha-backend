@@ -23,7 +23,13 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://darulimanislamiyah.vercel.app"
+  ],
+  credentials: true,
+}));
 
 app.use(express.json());
 
@@ -56,4 +62,5 @@ app.listen(PORT, () => {
     `Server running on port ${PORT}`
   );
 });
+
 
