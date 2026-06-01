@@ -10,6 +10,7 @@ import {
 import {
   protect,
 } from "../../middleware/authMiddleware.js";
+import upload from "../../middleware/uploadMiddleware.js";
 
 const router =
   express.Router();
@@ -19,6 +20,7 @@ router.get("/", getGallery);
 router.post(
   "/",
   protect,
+  upload.single("image"),
   createGallery
 );
 

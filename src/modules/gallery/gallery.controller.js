@@ -19,8 +19,29 @@ export const getGallery =
 
 export const createGallery =
   asyncHandler(async (req, res) => {
+
+    const result =
+      await cloudinary.uploader.upload(
+        `data:${req.file.mimetype};base64,${req.file.buffer.toString(
+          "base64"
+        )}`,
+        {
+          folder:
+            "darul-iman/gallery",
+        }
+      );
+
     const gallery =
-      await Gallery.create(req.body);
+      await Gallery.create({
+        title:
+          req.body.title,
+
+        category:
+          req.body.category,
+
+        image:
+          result.secure_url,
+      });
 
     res.status(201).json({
       success: true,
