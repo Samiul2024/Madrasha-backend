@@ -2,6 +2,8 @@ import asyncHandler from "../../utils/asyncHandler.js";
 
 import Gallery from "./gallery.model.js";
 
+import cloudinary from "../../config/cloudinary.js";
+
 export const getGallery =
   asyncHandler(async (req, res) => {
     const gallery =
