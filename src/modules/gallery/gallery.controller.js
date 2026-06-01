@@ -20,6 +20,10 @@ export const getGallery =
 export const createGallery =
   asyncHandler(async (req, res) => {
 
+    console.log("BODY:", req.body);
+
+    console.log("FILE:", req.file);
+
     const result =
       await cloudinary.uploader.upload(
         `data:${req.file.mimetype};base64,${req.file.buffer.toString(
@@ -31,16 +35,16 @@ export const createGallery =
         }
       );
 
+    console.log(
+      "CLOUDINARY:",
+      result.secure_url
+    );
+
     const gallery =
       await Gallery.create({
-        title:
-          req.body.title,
-
-        category:
-          req.body.category,
-
-        image:
-          result.secure_url,
+        title: req.body.title,
+        category: req.body.category,
+        image: result.secure_url,
       });
 
     res.status(201).json({
