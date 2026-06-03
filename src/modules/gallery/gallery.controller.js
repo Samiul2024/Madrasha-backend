@@ -37,14 +37,22 @@ export const createGallery =
 
     console.log(
       "CLOUDINARY:",
-      result.secure_url
+      result.secure_url,
+      result.public_id
     );
 
     const gallery =
       await Gallery.create({
         title: req.body.title,
-        category: req.body.category,
-        image: result.secure_url,
+
+        category:
+          req.body.category,
+
+        image:
+          result.secure_url,
+
+        publicId:
+          result.public_id,
       });
 
     res.status(201).json({
@@ -72,6 +80,7 @@ export const updateGallery =
 
 export const deleteGallery =
   asyncHandler(async (req, res) => {
+
     const gallery =
       await Gallery.findById(
         req.params.id
@@ -85,6 +94,16 @@ export const deleteGallery =
       );
     }
 
+    if (gallery.publicId) {
+
+      await cloudinary
+        .uploader
+        .destroy(
+          gallery.publicId
+        );
+
+    }
+
     await gallery.deleteOne();
 
     res.json({
@@ -92,4 +111,5 @@ export const deleteGallery =
       message:
         "Gallery item deleted",
     });
+
   });

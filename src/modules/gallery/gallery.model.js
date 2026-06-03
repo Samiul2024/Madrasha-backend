@@ -13,12 +13,16 @@ const gallerySchema =
         required: true,
       },
 
+      publicId: {
+        type: String,
+        required: true,
+      },
+
       category: {
         type: String,
         default: "General",
       },
     },
-
     {
       timestamps: true,
     }
