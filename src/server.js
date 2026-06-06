@@ -36,10 +36,21 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({
     success: true,
-    message:
-      "Darul Iman API Running",
+    message: "Darul Iman API Running",
   });
 });
+
+
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "Health check successful",
+    time: new Date().toISOString(),
+  });
+});
+
+
+
 
 app.use(
   "/api/courses",
